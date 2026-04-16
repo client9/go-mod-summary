@@ -42,6 +42,10 @@ golang.org/x/net
 
 ## Flags!
 
+* Using the cache is faster, especially it you already did a `go get`
+* Using github is slower but gives more infomration
+* But GitHub is grumpy if you don't the environment variable `GITHUB_TOKEN`
+
 | Flag | Meaning |
 |------|---------|
 | `-s` | Show a summary of the top-level module/repo (About, Website, Topics, README) |
@@ -50,5 +54,11 @@ golang.org/x/net
 | `-no-cache` | Skip the local module cache; always fetch from GitHub |
 | `-no-github` | Never call GitHub; only use the local module cache (misses skipped) |
 | `-lines N` | Number of README lines per entry (default 3, 0 to disable) |
+
+## Help Wanted
+
+Send a PR!  Or let me know if you found this useful.
+
+
 
 
