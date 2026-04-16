@@ -28,12 +28,18 @@ var wellKnownModules = map[string]string{
 	"go.opentelemetry.io/otel":   "github.com/open-telemetry/opentelemetry-go",
 }
 
+type githubLicense struct {
+	Name   string `json:"name"`   // e.g. "MIT License"
+	SPDXId string `json:"spdx_id"` // e.g. "MIT", "Apache-2.0"
+}
+
 type githubRepo struct {
-	Description string   `json:"description"`
-	FullName    string   `json:"full_name"`
-	HTMLURL     string   `json:"html_url"`
-	Homepage    string   `json:"homepage"`
-	Topics      []string `json:"topics"`
+	Description string         `json:"description"`
+	FullName    string         `json:"full_name"`
+	HTMLURL     string         `json:"html_url"`
+	Homepage    string         `json:"homepage"`
+	Topics      []string       `json:"topics"`
+	License     githubLicense  `json:"license"`
 }
 
 type githubReadme struct {
@@ -167,7 +173,7 @@ func moduleToGitHubPath(module string) (owner, repo string, ok bool) {
 	return "", "", false
 }
 
-func fetchGitHubInfo(client *http.Client, owner, repo, ref, token string) (description, homepage string, topics, readmeLines []string, err error) {
+func fetchGitHubInfo(client *http.Client, owner, repo, ref, token string) (description, homepage, license string, topics, readmeLines []string, err error) {
 	authHeader := ""
 	if token != "" {
 		authHeader = "Bearer " + token
@@ -212,6 +218,11 @@ func fetchGitHubInfo(client *http.Client, owner, repo, ref, token string) (descr
 	description = strings.Join(strings.Fields(description), " ")
 	homepage = strings.TrimSpace(repoInfo.Homepage)
 	topics = repoInfo.Topics
+	if id := repoInfo.License.SPDXId; id != "" && id != "NOASSERTION" {
+		license = id
+	} else if name := repoInfo.License.Name; name != "" {
+		license = name
+	}
 
 	// Fetch README
 	var readme githubReadme
@@ -407,7 +418,7 @@ func readCachedReadme(cacheDir, modPath, version string) (lines []string, cached
 // modulePath is the import path shown as the label (may differ from owner/repo for vanity paths).
 // version and vanity are optional — pass empty string / false when not applicable.
 func printRepoSummary(client *http.Client, modulePath, version string, owner, repo, ref string, vanity bool, token string, maxReadmeLines int) {
-	desc, homepage, topics, lines, err := fetchGitHubInfo(client, owner, repo, ref, token)
+	desc, homepage, license, topics, lines, err := fetchGitHubInfo(client, owner, repo, ref, token)
 	if err != nil {
 		fmt.Printf("%s  error: %v\n\n", modulePath, err)
 		return
@@ -426,6 +437,9 @@ func printRepoSummary(client *http.Client, modulePath, version string, owner, re
 	}
 	if desc != "" {
 		fmt.Printf("  About:   %s\n", desc)
+	}
+	if license != "" {
+		fmt.Printf("  License: %s\n", license)
 	}
 	if homepage != "" {
 		fmt.Printf("  Website: %s\n", homepage)
