@@ -22,12 +22,6 @@ github.com/yuin/goldmark
            > A Markdown parser written in Go. Easy to extend, standards-compliant, well-structured.
            goldmark is compliant with CommonMark 0.31.2.
 
-golang.org/x/exp
-  Version: v0.0.0-20250106191152-7588d65b2ba8
-  README:  exp
-           This subrepository holds experimental and deprecated (in the `old`
-           directory) packages.
-
 golang.org/x/net
   Version: v0.47.0
   README:  Go Networking
