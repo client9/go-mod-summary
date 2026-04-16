@@ -40,10 +40,12 @@ golang.org/x/net
            This repository holds supplementary Go networking packages.
 ```
 
+What else do you want to see?
+
 ## Flags!
 
 * Using the cache is faster, especially it you already did a `go get`
-* Using github is slower but gives more infomration
+* Using GitHub is slower but gives more infomration
 * But GitHub is grumpy if you don't the environment variable `GITHUB_TOKEN`
 
 | Flag | Meaning |
