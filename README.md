@@ -57,6 +57,14 @@ What else do you want to see?
 | `-no-github` | Never call GitHub; only use the local module cache (misses skipped) |
 | `-lines N` | Number of README lines per entry (default 3, 0 to disable) |
 
+## Building and Testing
+
+| command      | action     |
+|--------------|------------|
+| `make`       | builds CLI |
+| `make test`  | tests      |
+| `make clean` | cleans     |
+
 ## Help Wanted
 
 Send a PR!  Or let me know if you found this useful.
