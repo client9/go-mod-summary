@@ -48,14 +48,14 @@ What else do you want to see?
 * Using GitHub is slower but gives more infomration
 * But GitHub is grumpy if you don't the environment variable `GITHUB_TOKEN`
 
-| Flag | Meaning |
-|------|---------|
-| `-s` | Show a summary of the top-level module/repo (About, Website, Topics, README) |
-| `-m` | Show go.mod dependency summaries |
-| `-i` | Include indirect dependencies (with `-m`) |
-| `-no-cache` | Skip the local module cache; always fetch from GitHub |
-| `-no-github` | Never call GitHub; only use the local module cache (misses skipped) |
-| `-lines N` | Number of README lines per entry (default 3, 0 to disable) |
+| Flag           | Meaning |
+|----------------|---------|
+| `-s`           | Show a summary of the top-level module/repo (About, Website, Topics, README) |
+| `-m`           | Show go.mod dependency summaries |
+| `-i`           | Include indirect dependencies (with `-m`) |
+| `-no-cache`    | Skip the local module cache; always fetch from GitHub |
+| `-no-github`   | Never call GitHub; only use the local module cache (misses skipped) |
+| `-lines N`     | Number of README lines per entry (default 3, 0 to disable) |
 
 ## Building and Testing
 
