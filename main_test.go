@@ -93,6 +93,16 @@ func TestExtractReadmeLines(t *testing.T) {
 			want:  []string{"Real content."},
 		},
 		{
+			name:  "strips reference-style image",
+			input: "![Build Status][build-svg]\nReal content.",
+			want:  []string{"Real content."},
+		},
+		{
+			name:  "strips reference-style linked badge",
+			input: "[![][action-svg]][action-url] [![][codecov-svg]][codecov-url]\nReal content.",
+			want:  []string{"Real content."},
+		},
+		{
 			name:  "strips emphasis markers",
 			input: "**Bold text** and __also bold__.",
 			want:  []string{"Bold text and also bold."},

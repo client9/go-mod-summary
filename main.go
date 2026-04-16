@@ -252,11 +252,14 @@ func fetchGitHubInfo(client *http.Client, owner, repo, ref, token string) (descr
 	return
 }
 
-// mdImageRe matches any Markdown image, plain or wrapped in a link:
+// mdImageRe matches any Markdown image in both inline and reference styles,
+// with or without a wrapping link:
 //
-//	![alt](url)
-//	[![alt](url)](url)
-var mdImageRe = regexp.MustCompile(`\[?\!\[[^\]]*\]\([^)]*\)\]?(?:\([^)]*\))?`)
+//	![alt](url)           inline image
+//	![alt][ref]           reference-style image
+//	[![alt](url)](url)    inline linked image
+//	[![alt][ref]][ref]    reference-style linked image (e.g. [![][badge-svg]][badge-url])
+var mdImageRe = regexp.MustCompile(`\[?!\[[^\]]*\](?:\([^)]*\)|\[[^\]]*\])\]?(?:\([^)]*\)|\[[^\]]*\])?`)
 
 // mdEmojiRe matches Markdown emoji codes like :rocket: or :check_mark:
 var mdEmojiRe = regexp.MustCompile(`:[a-z][a-z0-9_]*:`)
