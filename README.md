@@ -1,5 +1,5 @@
 # go-mod-summary
-English summary of go.mod dependencies
+English summary of go.mod dependencies, written in Go of course.
 
 
 ## What is all this stuff?
@@ -58,7 +58,7 @@ You want flags? We got flags!
 
 * Using the cache is faster, especially it you already did a `go get`
 * Using GitHub is slower but gives more infomration
-* But GitHub is grumpy if you don't the environment variable `GITHUB_TOKEN`
+* But GitHub is grumpy if you don't set the environment variable `GITHUB_TOKEN`
 
 ## Building and Testing
 
