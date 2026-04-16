@@ -1,5 +1,5 @@
 
-build:
+go-mod-summary: *.go
 	go build ./...
 
 test:
